@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Avaliações</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-container">
+        <img src="img/image 2.png" alt="Logo da Qualidade" class="logo">
+        <div class="app-title">Portal de Avaliações</div>
+      </div>
+      
+      <div class="step-indicator">
+        <div class="step" id="step1-indicator">
+          <div class="step-circle">1</div>
+          <div class="step-label">Informações</div>
+        </div>
+        <div class="step" id="step2-indicator">
+          <div class="step-circle">2</div>
+          <div class="step-label">Selecionar Área</div>
+        </div>
+        <div class="step" id="step3-indicator">
+          <div class="step-circle">3</div>
+          <div class="step-label">Avaliar</div>
+        </div>
+        <div class="step" id="step4-indicator">
+          <div class="step-circle">4</div>
+          <div class="step-label">Concluir</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1: Information Form -->
+    <div class="card fade-in" id="step1">
+      <div class="card-header">
+        Informações da Avaliação
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="channel">Canal</label>
+          <select id="channel" class="form-control" required>
+            <option value="" disabled selected>Carregando canais...</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="unit">Unidade</label>
+          <select id="unit" class="form-control" required>
+            <option value="" disabled selected>Selecione o canal primeiro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="responsible">Responsável</label>
+          <select id="responsible" class="form-control" required>
+            <option value="" disabled selected>Selecione a unidade primeiro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="date">Data da Avaliação</label>
+          <input type="date" id="date" class="form-control" required>
+        </div>
+        
+        <div class="text-center">
+          <button class="btn btn-lg" id="nextStepBtn">Próxima Etapa <i class="ri-arrow-right-line"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Select Section -->
+    <div class="card fade-in hidden" id="step2">
+      <div class="card-header">
+        Selecione a Área para Avaliar
+      </div>
+      <div class="card-body">
+        <p class="text-center" style="margin-bottom: 25px; font-size: 1.1rem;">
+          Escolha por onde deseja iniciar a avaliação
+        </p>
+        
+        <div class="sections-container" id="sections-container">
+          <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Carregando seções...</p>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-between flex-wrap" style="margin-top: 30px;">
+          <button class="btn btn-accent" id="backToStep1Btn">
+            <i class="ri-arrow-left-line"></i> Voltar
+          </button>
+          <button class="btn btn-success hidden" id="finishEvaluationBtn">
+            Finalizar Avaliação <i class="ri-check-line"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Evaluate Section -->
+    <div class="card fade-in hidden" id="step3">
+      <div class="card-header">
+        Avaliação da Área: <span id="current-section-name"></span>
+      </div>
+      <div class="card-body">
+        <div class="section-info">
+          <div class="section-name">
+            <i class="ri-folder-open-line"></i> <span id="current-section-title"></span>
+          </div>
+          <div class="section-status">
+            <span class="status-dot" id="section-status-dot"></span>
+            <span id="section-status-text">Pendente</span>
+          </div>
+        </div>
+        
+        <div id="questions-container">
+          <!-- Questions will be loaded here dynamically -->
+        </div>
+        
+        <div class="d-flex justify-between flex-wrap" style="margin-top: 30px;">
+          <button class="btn btn-accent" id="backToStep2Btn">
+            <i class="ri-arrow-left-line"></i> Voltar
+          </button>
+          <button class="btn" id="saveSectionBtn">
+            <i class="ri-save-line"></i> Salvar e Voltar
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Step 4: Report -->
+    <div class="card fade-in hidden" id="step4">
+      <div class="card-header">
+        Relatório de Avaliação
+      </div>
+      <div class="card-body">
+        <div id="report-container">
+          <!-- Report content will be loaded here -->
+        </div>
+        
+        <div class="d-flex justify-center flex-wrap" style="margin-top: 30px; gap: 15px;">
+          <button class="btn btn-accent" id="backToStep2FromReport">
+            <i class="ri-arrow-left-line"></i> Voltar
+          </button>
+          <button class="btn" id="printReportBtn">
+            <i class="ri-printer-line"></i> Imprimir Relatório
+          </button>
+          <button class="btn btn-success" id="newEvaluationBtn">
+            <i class="ri-file-add-line"></i> Nova Avaliação
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Portal de Qualidade &copy; 2025 - Todos os direitos reservados -  Grupo Alvorar</div>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Política de Privacidade</a>
+      <a href="#" class="footer-link">Termos de Uso</a>
+      <a href="#" class="footer-link">Suporte</a>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
