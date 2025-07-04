@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="report-meta-item"><span class="report-meta-label">Duração:</span> ${durationText}</div>
         </div>
       </div>
-      <img src="https://via.placeholder.com/150/4361ee/ffffff?text=Logo" alt="Logo" style="height: 80px;">
+      <img src="image 2.png">
     `;
     reportContainer.appendChild(reportHeader);
     
