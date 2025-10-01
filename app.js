@@ -1,6 +1,6 @@
 // Configuração do Supabase
-const SUPABASE_URL = 'https://tdpakzbezbucuoaafkej.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkcGFremJlemJ1Y3VvYWFma2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NTk5MjksImV4cCI6MjA1NjIzNTkyOX0.R_e6Xpqw-k8nwPLL60AsKm8iJ1TcHsF9_Zps9SE1FVM';
+const SUPABASE_URL = 'https://itztfaplmtfqyjphzzio.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0enRmYXBsbXRmcXlqcGh6emlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkyNjIyMzEsImV4cCI6MjA3NDgzODIzMX0.qFXOOHeLYlkZMzICqYns9nhQCBrjB89yQExNAFNuzH0';
 
 // Cria a instância do Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -1252,3 +1252,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
 });
+
